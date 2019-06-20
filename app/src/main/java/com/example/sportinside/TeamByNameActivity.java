@@ -2,7 +2,6 @@ package com.example.sportinside;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,7 +16,7 @@ import com.example.sportinside.data.TeamByName.entities.TeamEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamByNameActivity extends AppCompatActivity implements Observer<List<TeamEntity>>, LifecycleOwner {
+public class TeamByNameActivity extends AppCompatActivity implements Observer<List<TeamEntity>> {
     TextView teamName;
     TextView formedYear;
     LiveData<List<TeamEntity>> teamData;
@@ -46,6 +45,10 @@ public class TeamByNameActivity extends AppCompatActivity implements Observer<Li
         teamData = mainViewModel.getTeamData();
         teamData.observe(this,this);
         Log.i("onStart","Observe" );
+        // создаем адаптер
+        adapter = new TeamAdapter(null);
+        // устанавливаем для списка адаптер
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -60,10 +63,8 @@ public class TeamByNameActivity extends AppCompatActivity implements Observer<Li
             //Log.e("Omn")
             formedYear = (TextView)findViewById(R.id.formedYear);
             formedYear.setText(""+root.get(0).formedYear);
-            // создаем адаптер
+
             adapter.changeData(root);
-            // устанавливаем для списка адаптер
-            recyclerView.setAdapter(adapter);
         }
     }
 

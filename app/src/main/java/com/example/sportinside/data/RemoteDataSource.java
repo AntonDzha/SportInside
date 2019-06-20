@@ -30,38 +30,45 @@ public class RemoteDataSource {
     }
 
     public Teams getTeams(String teamName){
+        Teams result = null;
         Log.e("Remote","Start getTeams");
         Call<Teams> call = teamService.getTeamByName(teamName);
         Log.e("Remote","After call");
-        //try {
+        try {
             Log.e("Remote","1Try: " + call.request().url().toString());
-            call.enqueue(new Callback<Teams>() {
-                @Override
-                public void onResponse(Call<Teams> call, Response<Teams> response) {
-                    if (response.isSuccessful()) {
-                        Log.e("Remote","Ok");
-                        Log.e("Remote", "Resp: " + response.body());
-
-                    }
-                    else {
-                        Log.e("Remote",""+response.code());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Teams> call, Throwable t) {
-                    Log.e("Remote", "Ex: " + t.toString());
-                }
-            });
+            Response<Teams> response = call.execute();
+            if (response.isSuccessful()) {
+                Log.e("Remote", "Ok");
+                Log.e("Remote", "Resp: " + response.body());
+                result = response.body();
+            }
+//            call.enqueue(new Callback<Teams>() {
+//                @Override
+//                public void onResponse(Call<Teams> call, Response<Teams> response) {
+//                    if (response.isSuccessful()) {
+//                        Log.e("Remote","Ok");
+//                        Log.e("Remote", "Resp: " + response.body());
+//
+//                    }
+//                    else {
+//                        Log.e("Remote",""+response.code());
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Teams> call, Throwable t) {
+//                    Log.e("Remote", "Ex: " + t.toString());
+//                }
+//            });
             Log.e("Remote","Try");
 
-//        }catch(IOException ioex){
-//                Log.e("Remote",""+ioex);
-//
-//            //return null
-//        }
+        }catch(IOException ioex){
+                Log.e("Remote",""+ioex);
+
+            //return null
+        }
         Log.e("Remote","NeProshlo");
-        return null;
+        return result;
     }
 
 }

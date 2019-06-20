@@ -57,7 +57,7 @@ public class LocalDataSource {
             teamList.add(teamEntity);
             //teamData.postValue(teamEntity);
         }
-        teamData.postValue(teamList);
+        //teamData.postValue(teamList);
     }
 
 
