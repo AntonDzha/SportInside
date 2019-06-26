@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportinside.data.TeamByName.entities.TeamEntity;
 import com.example.sportinside.data.TeamByName.entities.Teams;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamHolder> {
     }
 
     class TeamHolder extends RecyclerView.ViewHolder{
-        private ImageView wthrImg;
+        private ImageView tmBadge;
         private TextView formedYear;
         private TextView strTeam;
         private TextView strSport;
@@ -51,6 +52,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamHolder> {
             strTwitter = view.findViewById(R.id.strTwitter);
             strInstagram = view.findViewById(R.id.strInstagram);
             //descr=view.findViewById(R.id.descr);
+            tmBadge = view.findViewById(R.id.team_img);
         }
         public void setData(String info){
             formedYear.setText(info);
@@ -78,6 +80,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamHolder> {
         holder.strDescriptionEN.setText(""+data.get(i).strDescriptionEN);
         holder.strTwitter.setText(""+data.get(i).strTwitter);
         holder.strInstagram.setText(""+data.get(i).strInstagram);
+        Picasso.get().load(data.get(i).strTeamBadge).into(holder.tmBadge);
 
     }
 
@@ -89,4 +92,5 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamHolder> {
             return 0;
         }
     }
+
 }

@@ -42,6 +42,10 @@ public class RemoteDataSource {
                 Log.e("Remote", "Resp: " + response.body());
                 result = response.body();
             }
+            else {
+                        Log.e("Remote","Fail"+response.code());
+            }
+
 //            call.enqueue(new Callback<Teams>() {
 //                @Override
 //                public void onResponse(Call<Teams> call, Response<Teams> response) {
