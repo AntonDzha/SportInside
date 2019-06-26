@@ -15,12 +15,12 @@ public class MainViewModel extends ViewModel {
     private Repository repository;
     LiveData<List<TeamEntity>> teamData;//list
 
-    public void loadData(Context context, String team){
+    public void loadData(Repository repository, String team){
         this.repository = repository;
         Log.e("Vhod","yeee");
         if(teamData==null){
             Log.e("Vhod","voshlo");
-            repository = new Repository(context);
+            //repository = new Repository(context);
             teamData = repository.getTeamData(team);
 
         }

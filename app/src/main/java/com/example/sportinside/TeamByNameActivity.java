@@ -18,12 +18,11 @@ import java.util.List;
 
 public class TeamByNameActivity extends AppCompatActivity implements Observer<List<TeamEntity>> {
     TextView teamName;
-    TextView formedYear;
     LiveData<List<TeamEntity>> teamData;
     private TeamAdapter adapter;
     private RecyclerView recyclerView;
     private List<TeamEntity>team0;
-
+    Repository repository;
 
 
     @Override
@@ -40,7 +39,11 @@ public class TeamByNameActivity extends AppCompatActivity implements Observer<Li
         //adapter = new TeamAdapter(team0);
 
         MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mainViewModel.loadData(this,Team);
+
+        repository=((SportApp)getApplication()).getRepository();
+        mainViewModel.loadData(repository,Team);
+
+        //mainViewModel.loadData(this,Team);
 
         teamData = mainViewModel.getTeamData();
         teamData.observe(this,this);
@@ -54,16 +57,9 @@ public class TeamByNameActivity extends AppCompatActivity implements Observer<Li
     @Override
     public void onChanged(List<TeamEntity> root) {
         Log.i("Root size","" + root.size());
-        //for (int i= 0; i < root.size(); i++) {
-          //  Log.i("Outcome","" + root.get(i).strStadium);
-        //}
+
         //adapter.changeData(root);
         if /*(root != null)&&*/(!root.isEmpty()) {
-            //temper.setText(""+root.temp);
-            //Log.e("Omn")
-            formedYear = (TextView)findViewById(R.id.formedYear);
-            formedYear.setText(""+root.get(0).formedYear);
-
             adapter.changeData(root);
         }
     }

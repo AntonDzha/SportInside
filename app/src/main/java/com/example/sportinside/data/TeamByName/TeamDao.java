@@ -23,6 +23,8 @@ public interface TeamDao {
     @Delete
     public void delete(TeamEntity teamEntity);
 
+    @Query("DELETE FROM team")
+    public void clearDB();
     @Query("SELECT * FROM team")
     LiveData<List<TeamEntity>> getTeam();
 }

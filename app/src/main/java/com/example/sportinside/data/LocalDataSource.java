@@ -26,6 +26,7 @@ public class LocalDataSource {
     public void storeTeams(Teams teams){
         List<Team> lteams = teams.getTeams();
         List<TeamEntity> teamList = new ArrayList<>();
+        db.teamDao().clearDB();
         for(int i = 0; i < lteams.size(); i++){
             String formedYear = lteams.get(i).getIntFormedYear();
             String strTeamBadge = lteams.get(i).getStrTeamBadge();
